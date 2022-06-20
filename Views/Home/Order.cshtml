@@ -1,0 +1,49 @@
+﻿@model List<Order>
+@{
+    ViewData["Title"] = "Orders";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<table id="orderTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Created On</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Created On</th>
+            </tr>
+        </tfoot>
+    </table>
+
+@section Scripts{
+    <script>
+        $('#orderTable').DataTable( {
+        processing: true,
+        serverSide: true
+        ,
+        //filter: true
+    ajax: {
+        url: '/home/orderlist',
+        type: 'POST'
+        //,
+        //datatype: json
+
+    },
+    columns: [
+                { data: 'id' },
+                { data: 'status' },
+                { data: 'total' },
+                { data: 'createdonutc' }
+            ]
+} );
+    </script>
+}
