@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "s4FAiC/jVFkDKJBgRXSz7fViftU/i/7WkFJcFqTIBgE381HNb/k9FlqeOnC2w9FgmOjiiGP3cA3yeB94Uclrpw==",
+  "dgSpecHash": "GBD1UHqZc84HTnd3HUZVVagFeaTx6L59a/AcFfLydAaJp/Hcim6qxhYuIZhKnbetA6vg+PdNnZhh5ccXraUHIg==",
   "success": true,
   "projectFilePath": "C:\\Users\\abudr\\source\\repos\\ServerSidePagination\\ServerSidePagination.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\abudr\\.nuget\\packages\\datatables.net\\1.11.3\\datatables.net.1.11.3.nupkg.sha512",
+    "C:\\Users\\abudr\\.nuget\\packages\\datatables.net-dt\\1.12.1\\datatables.net-dt.1.12.1.nupkg.sha512",
     "C:\\Users\\abudr\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\abudr\\.nuget\\packages\\jquery\\1.7.0\\jquery.1.7.0.nupkg.sha512",
     "C:\\Users\\abudr\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\abudr\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\abudr\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",

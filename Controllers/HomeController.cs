@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ServerSidePagination.Models;
+using ServerSidePagination.Models.ViewModel;
 using System.Diagnostics;
 
 namespace ServerSidePagination.Controllers
@@ -17,53 +20,55 @@ namespace ServerSidePagination.Controllers
         }
 
         [Route("home/order")]
-        public IActionResult Order()
+        public async Task<IActionResult> Order()
         {
             ServerSidePaginationContext db = new();
-            var order = db.Orders.ToList();
 
-            return View(order);
+            var statusRaw = await db.Orders.Select(c => c.Status).Distinct().ToListAsync();
+            List<SelectListItem> status = statusRaw.ConvertAll(a =>
+            {
+                return new SelectListItem()
+                {
+                    Text = a,
+                    Value = a,
+                    Selected = false
+                };
+            });
+
+            ViewBag.StatusList = status;
+
+            return View();
         }
 
         [HttpPost]
         [Route("home/orderlist")]
-        public IActionResult OrderList(string hi)
+        public async Task<IActionResult> OrderList(SearchVM model)
         {
             ServerSidePaginationContext db = new();
 
             var pageSize = Convert.ToInt32(HttpContext.Request.Form["length"].FirstOrDefault() ?? "0");
             var skip = Convert.ToInt32(Request.Form["start"].FirstOrDefault() ?? "0");
             var draw = Request.Form["draw"].FirstOrDefault();
-            var search = Request.Form["search[value]"].FirstOrDefault();
-            //var search = Request.Form("draw").FirstOrDefault();
 
-             List<Order> orders = new();
+            List<Order> orders = new();
             int recordsFiltered = 0;
 
-            var countOrder = db.Orders.Count();
-            if (search != "")
+            var countOrder = await  db.Orders.CountAsync();
+            var ordersFiltered = db.Orders.AsQueryable();
+                
+            if(model.Id is not null)
             {
-                try
-                {
-                    var ordersFiltered = db.Orders.Where(p => p.Id.Contains(search.ToLower()) ||
-                        p.Status.Contains(search.ToLower()));
-                    
-                    
-                    orders = ordersFiltered.Skip(skip).Take(pageSize).ToList();
-                    recordsFiltered = ordersFiltered.Count();
-                }catch(Exception ex)
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-            else
-            {
-            orders = db.Orders.Skip(skip).Take(pageSize).ToList();
-                recordsFiltered = countOrder;
-
+            ordersFiltered = ordersFiltered.Where(c => c.Id == model.Id);
             }
 
-
+            //if(model.Status is not null)
+            //{
+            //    ordersFiltered = ordersFiltered.Where()
+            //}
+                    
+            orders = await ordersFiltered.Skip(skip).Take(pageSize).ToListAsync();
+            recordsFiltered = await ordersFiltered.CountAsync();
+               
 
 
             return Json(new
@@ -79,7 +84,7 @@ namespace ServerSidePagination.Controllers
                     createdonutc = c.CreatedOnUtc
                 }).ToList()
             });
-            }
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

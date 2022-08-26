@@ -11,10 +11,21 @@
           "Microsoft.EntityFrameworkCore": "6.0.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.6",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.6",
-          "WakaTime": "8.1.11"
+          "WakaTime": "8.1.11",
+          "datatables.net-dt": "1.12.1"
         },
         "runtime": {
           "ServerSidePagination.dll": {}
+        }
+      },
+      "datatables.net/1.11.3": {
+        "dependencies": {
+          "jQuery": "1.7.0"
+        }
+      },
+      "datatables.net-dt/1.12.1": {
+        "dependencies": {
+          "datatables.net": "1.11.3"
         }
       },
       "Humanizer.Core/2.8.26": {
@@ -25,6 +36,7 @@
           }
         }
       },
+      "jQuery/1.7.0": {},
       "Microsoft.CSharp/4.5.0": {},
       "Microsoft.Data.SqlClient/2.1.4": {
         "dependencies": {
@@ -473,12 +485,33 @@
       "serviceable": false,
       "sha512": ""
     },
+    "datatables.net/1.11.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-n6wjQC7FbSHQTB/1vNJzy6YhxwVScDQjV2PeJjT/RizOtO4XJkPDJYi6P9CavlBgEEIdL80Jwdd3LjzBzpXRpw==",
+      "path": "datatables.net/1.11.3",
+      "hashPath": "datatables.net.1.11.3.nupkg.sha512"
+    },
+    "datatables.net-dt/1.12.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Qg5gxSbm0cF1XSXQZ70iy+acGQPi1JtDcNPTqJu8V8JNaGtsclUh6GXxqxgLwmQem547/hzSpxGHCUafvX4kQw==",
+      "path": "datatables.net-dt/1.12.1",
+      "hashPath": "datatables.net-dt.1.12.1.nupkg.sha512"
+    },
     "Humanizer.Core/2.8.26": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "path": "humanizer.core/2.8.26",
       "hashPath": "humanizer.core.2.8.26.nupkg.sha512"
+    },
+    "jQuery/1.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UEZuBreHZNLao3z9zNPeSadyoPwKDP/5kFh+Mn1Pm9ZS0czk7bv0O6RreloGSIMAfTLZCiigNkuPb2bXKtUM+g==",
+      "path": "jquery/1.7.0",
+      "hashPath": "jquery.1.7.0.nupkg.sha512"
     },
     "Microsoft.CSharp/4.5.0": {
       "type": "package",

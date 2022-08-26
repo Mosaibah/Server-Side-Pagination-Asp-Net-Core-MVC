@@ -12,11 +12,54 @@
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <SourceRoot Include="C:\Users\abudr\.nuget\packages\" />
   </ItemGroup>
+  <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Content Include="$(NuGetPackageRoot)datatables.net-dt\1.12.1\contentFiles\any\any\wwwroot\css\jquery.dataTables.css" Condition="Exists('$(NuGetPackageRoot)datatables.net-dt\1.12.1\contentFiles\any\any\wwwroot\css\jquery.dataTables.css')">
+      <NuGetPackageId>datatables.net-dt</NuGetPackageId>
+      <NuGetPackageVersion>1.12.1</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <Private>False</Private>
+      <Link>wwwroot\css\jquery.dataTables.css</Link>
+    </Content>
+    <Content Include="$(NuGetPackageRoot)datatables.net-dt\1.12.1\contentFiles\any\any\wwwroot\css\jquery.dataTables.min.css" Condition="Exists('$(NuGetPackageRoot)datatables.net-dt\1.12.1\contentFiles\any\any\wwwroot\css\jquery.dataTables.min.css')">
+      <NuGetPackageId>datatables.net-dt</NuGetPackageId>
+      <NuGetPackageVersion>1.12.1</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <Private>False</Private>
+      <Link>wwwroot\css\jquery.dataTables.min.css</Link>
+    </Content>
+    <Content Include="$(NuGetPackageRoot)datatables.net-dt\1.12.1\contentFiles\any\any\wwwroot\js\dataTables.dataTables.d.ts" Condition="Exists('$(NuGetPackageRoot)datatables.net-dt\1.12.1\contentFiles\any\any\wwwroot\js\dataTables.dataTables.d.ts')">
+      <NuGetPackageId>datatables.net-dt</NuGetPackageId>
+      <NuGetPackageVersion>1.12.1</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <Private>False</Private>
+      <Link>wwwroot\js\dataTables.dataTables.d.ts</Link>
+    </Content>
+    <Content Include="$(NuGetPackageRoot)datatables.net-dt\1.12.1\contentFiles\any\any\wwwroot\js\dataTables.dataTables.js" Condition="Exists('$(NuGetPackageRoot)datatables.net-dt\1.12.1\contentFiles\any\any\wwwroot\js\dataTables.dataTables.js')">
+      <NuGetPackageId>datatables.net-dt</NuGetPackageId>
+      <NuGetPackageVersion>1.12.1</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <Private>False</Private>
+      <Link>wwwroot\js\dataTables.dataTables.js</Link>
+    </Content>
+    <Content Include="$(NuGetPackageRoot)datatables.net-dt\1.12.1\contentFiles\any\any\wwwroot\js\dataTables.dataTables.min.js" Condition="Exists('$(NuGetPackageRoot)datatables.net-dt\1.12.1\contentFiles\any\any\wwwroot\js\dataTables.dataTables.min.js')">
+      <NuGetPackageId>datatables.net-dt</NuGetPackageId>
+      <NuGetPackageVersion>1.12.1</NuGetPackageVersion>
+      <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
+      <Private>False</Private>
+      <Link>wwwroot\js\dataTables.dataTables.min.js</Link>
+    </Content>
+  </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore\6.0.6\buildTransitive\net6.0\Microsoft.EntityFrameworkCore.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore\6.0.6\buildTransitive\net6.0\Microsoft.EntityFrameworkCore.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore.design\6.0.6\build\net6.0\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore.design\6.0.6\build\net6.0\Microsoft.EntityFrameworkCore.Design.props')" />
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\abudr\.nuget\packages\microsoft.entityframeworkcore.tools\6.0.6</PkgMicrosoft_EntityFrameworkCore_Tools>
+    <PkgjQuery Condition=" '$(PkgjQuery)' == '' ">C:\Users\abudr\.nuget\packages\jquery\1.7.0</PkgjQuery>
   </PropertyGroup>
 </Project>
