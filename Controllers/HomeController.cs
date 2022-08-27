@@ -14,13 +14,7 @@ namespace ServerSidePagination.Controllers
         {
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [Route("home/order")]
-        public async Task<IActionResult> Order()
+        public async Task<IActionResult> Index()
         {
             ServerSidePaginationContext db = new();
 
@@ -29,8 +23,8 @@ namespace ServerSidePagination.Controllers
             {
                 return new SelectListItem()
                 {
-                    Text = a,
-                    Value = a,
+                    Text = a.Trim(),
+                    Value = a.Trim(),
                     Selected = false
                 };
             });
@@ -60,12 +54,27 @@ namespace ServerSidePagination.Controllers
             {
             ordersFiltered = ordersFiltered.Where(c => c.Id == model.Id);
             }
+            if (model.Status is not null)
+            {
+                ordersFiltered = ordersFiltered.Where(x => model.Status.Contains(x.Status));
+            }
+            if (model.MinTotal is not null)
+            {
+                ordersFiltered = ordersFiltered.Where(c => model.MinTotal <= c.Total);
+            }
+            if (model.MaxTotal is not null)
+            {
+                ordersFiltered = ordersFiltered.Where(c => model.MaxTotal >= c.Total);
+            }
+            if (model.StartDate is not null)
+            {
+                ordersFiltered = ordersFiltered.Where(c => c.CreatedOnUtc > model.StartDate);
+            }
+            if (model.EndDate is not null)
+            {
+                ordersFiltered = ordersFiltered.Where(c => c.CreatedOnUtc < model.EndDate.Value.AddDays(1));
+            }
 
-            //if(model.Status is not null)
-            //{
-            //    ordersFiltered = ordersFiltered.Where()
-            //}
-                    
             orders = await ordersFiltered.Skip(skip).Take(pageSize).ToListAsync();
             recordsFiltered = await ordersFiltered.CountAsync();
                
@@ -81,7 +90,7 @@ namespace ServerSidePagination.Controllers
                     id = c.Id,
                     status = c.Status,
                     total = c.Total,
-                    createdonutc = c.CreatedOnUtc
+                    createdonutc = c.CreatedOnUtc.ToString("yyyy/MM/dd")
                 }).ToList()
             });
         }

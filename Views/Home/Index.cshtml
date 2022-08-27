@@ -1,8 +1,112 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Orders";
 }
+<h1>@ViewData["Title"]</h1>
+@model ServerSidePagination.Models.ViewModel.SearchVM;
+<form id="form" asp-action="OrderList"  method="POST" >
+    <div class="row g-2">
+        <div class="offset-1 col-10 offset-md-0 col-sm-4 col-md-3">
+            <label for="Id" class="form-label">Id</label>
+            <input class=" form-control" type="number" asp-for="Id" />
+        </div>
+        <div class="offset-1 col-10 offset-md-0 col-sm-4 col-md-3">
+            <label for="Status" class="form-label">Status</label>
+            <select class="form-select w-100 select2" asp-items="@ViewBag.StatusList" asp-for="Status" multiple></select>
+        </div>
+        <div class="offset-1 col-10 offset-md-0 col-sm-4 col-md-3">
+            <label for="MinTotal" class="form-label">MinTotal</label>
+            <input class=" form-control" type="number" step=".01" asp-for="MinTotal" />
+        </div>
+        <div class="offset-1 col-10 offset-md-0 col-sm-4 col-md-3">
+            <label for="MaxTotal" class="form-label">MaxTotal</label>
+            <input class=" form-control" type="number" step=".01" asp-for="MaxTotal" />
+        </div>
+        <div class="offset-1 col-10 offset-md-0 col-sm-4 col-md-3">
+            <label class="form-label">Start date</label>
+            <input type="text" class="form-control flatpickr-basic  bg-white" placeholder="YYYY-MM-DD" name="StartDate" id="StartDate" />
+        </div>
+        <div class="offset-1 col-10 offset-md-0 col-sm-4 col-md-3 mt-md-2">
+            <label class="form-label">End date</label>
+            <input type="text" class="form-control flatpickr-basic  bg-white" placeholder="YYYY-MM-DD" name="EndDate" id="EndDate" />
+        </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+        <div class="offset-1 offset-md-3 col-10 my-5 col-md-5 justify-content-center">
+            <button class="btn btn-success  w-100" onclick="Search()">Search</button>
+        </div>
+
+    </div>
+</form>
+
+
+<div style="max-width:calc(100vm-2rem);overflow-x:scroll">
+
+<table id="orderTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Created On</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Created On</th>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+
+
+@section Scripts{
+    <script>
+
+        window.addEventListener('load', (event) => {
+            Search();
+        });
+
+        $('#form').on('submit', function (e) {
+                    e.preventDefault();  
+         })
+
+        function Search(){
+            //debugger;
+            $('#orderTable').DataTable( {
+
+            ajax: {
+                url: '/home/orderlist',
+                type: 'POST',
+                data: {
+                    Id : $("Id").val(),
+                    Status: $("#Status").val(),
+                    MinTotal: $("#MinTotal").val(),
+                    MaxTotal: $("#MaxTotal").val(),
+                    StartDate: $("#StartDate").val(),
+                    EndDate: $("#EndDate").val(),
+                }
+            },
+            "bDestroy": true,
+            processing: true,
+            serverSide: true,
+            sort: false,
+            filter: false,
+
+            columns: [
+                    { data: 'id' },
+                    { data: 'status' },
+                    { data: 'total' },
+                    { data: 'createdonutc' }
+                ]
+
+            });
+        }
+
+            $('.select2').select2();
+            flatpickr('#StartDate', {});
+            flatpickr('#EndDate', {});
+
+    </script>
+}
