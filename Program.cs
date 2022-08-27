@@ -1,4 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using ServerSidePagination.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ServerSidePaginationContext>(x => x.UseNpgsql(connectionString));
+
+//builder.Services.AddDbContext<ServerSidePaginationContext>(options =>
+//    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

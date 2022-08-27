@@ -18,7 +18,7 @@ namespace ServerSidePagination.Controllers
         {
             ServerSidePaginationContext db = new();
 
-            var statusRaw = await db.Orders.Select(c => c.Status).Distinct().ToListAsync();
+            var statusRaw = await db.Order.Select(c => c.Status).Distinct().ToListAsync();
             List<SelectListItem> status = statusRaw.ConvertAll(a =>
             {
                 return new SelectListItem()
@@ -47,8 +47,8 @@ namespace ServerSidePagination.Controllers
             List<Order> orders = new();
             int recordsFiltered = 0;
 
-            var countOrder = await  db.Orders.CountAsync();
-            var ordersFiltered = db.Orders.AsQueryable();
+            var countOrder = await  db.Order.CountAsync();
+            var ordersFiltered = db.Order.AsQueryable();
                 
             if(model.Id is not null)
             {

@@ -7,24 +7,29 @@ namespace ServerSidePagination.Models
 {
     public partial class ServerSidePaginationContext : DbContext
     {
+        protected readonly IConfiguration Configuration;
+
         public ServerSidePaginationContext()
         {
         }
 
-        public ServerSidePaginationContext(DbContextOptions<ServerSidePaginationContext> options)
+        public ServerSidePaginationContext(DbContextOptions<ServerSidePaginationContext> options, IConfiguration configuration)
             : base(options)
         {
+            Configuration = configuration;
         }
 
-        public virtual DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<Order> Order { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-22FSHU7\\SQLEXPRESS;Database=ServerSidePagination;Trusted_Connection=True;");
-            }
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            optionsBuilder.UseNpgsql(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
